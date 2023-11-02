@@ -15,8 +15,44 @@ mongoose
     // Before adding any recipes to the database, let's remove all existing ones
     return Recipe.deleteMany()
   })
-  .then(() => {
-    // Run your code here, after you have insured that the connection was made
+   .then(() => {
+    //*Insertando nueva receta
+    return Recipe.create({
+    title: "Spaguetti Carbonara",
+    level: "UltraPro Chef",
+    ingredients: [
+     "Spaguettis",
+     "Egg",
+     "Bacon",
+      "Cream",
+     "Onion"
+    ],
+    cuisine: "Italian",
+    dishType: "main_course",
+    image: "https://i0.wp.com/isinginthekitchen.com/wp-content/uploads/2014/12/dsc_0036.jpg?ssl=1",
+    duration: 30,
+    creator: "Chef Ratatoullie",
+    created: "02/11/2023"
+    
+    })
+  
+            
+  })
+  .then(()=>{
+    //*Añadiendo array de data.json
+    return Recipe.insertMany(data) 
+  })
+  .then(()=>{
+    //*Actualizar obj array
+    return Recipe.findOneAndUpdate({title : "Rigatoni alla Genovese"}, {duration: 100})
+
+  })
+  .then(()=>{
+    //*Eliminar obj array
+    return Recipe.findOneAndDelete({title: "Carrot Cake" })
+  })
+  .then((response)=>{
+    console.log("updated", response)
   })
   .catch(error => {
     console.error('Error connecting to the database', error);
