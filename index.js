@@ -52,8 +52,12 @@ mongoose
     return Recipe.findOneAndDelete({title: "Carrot Cake" })
   })
   .then((response)=>{
-    console.log("updated", response)
+    console.log(response)    
   })
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
+  mongoose.disconnect(()=>{
+    console.log("closed")
+  })
+
